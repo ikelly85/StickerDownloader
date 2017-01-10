@@ -13,6 +13,7 @@
 #import "PostSticker.h"
 #import "AppDelegate.h"
 #import "ThumbnailWorker.h"
+#import "StringUtils.h"
 
 @implementation MasterViewController
 {
@@ -47,13 +48,12 @@
         
         __block NSInteger i = 0;
         for (Post *post in posts) {
-            [packDownloads addObject:post.thumbnailOn];
-            [packDownloads addObject:post.thumbnailOff];
+            [packDownloads addObject:post];
             
             [PostSticker globalTimelinePostsWithBlock:post.stickerPackSeq block:^(NSArray *postStickers, NSError *error) {
                 if (postStickers && [postStickers count] > 0) {
                     for (PostSticker *postSticker in postStickers) {
-                        [itemDownloads addObject:postSticker.thumbnail];
+                        [itemDownloads addObject:postSticker];
                     }
                 }
                 

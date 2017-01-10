@@ -10,22 +10,37 @@
 #import "ObjectiveCUtil.h"
 #import "CommonUtil.h"
 #import "AppDelegate.h"
+#import "Post.h"
+#import "PostSticker.h"
+#import "StringUtils.h"
 
 @implementation ThumbnailWorker
 
 SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
 
-- (NSString *)makePath:(NSString *)thumbnail
+- (NSString *)makePath:(NSString *)thumbnail index:(NSInteger)index
 {
-    NSArray *targetUrlList = [thumbnail componentsSeparatedByString:@"/"];
-    NSString *fileName = [targetUrlList lastObject];
+    NSString *targetId = nil;
+    AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    if (index < [appDelegate.packDownloads count]) {
+        Post *post = [appDelegate.packDownloads objectAtIndex:index];
+        if ([StringUtils equals:post.thumbnailOn andString:thumbnail]) {
+            targetId = post.stickerPackId;
+        }
+    }
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (index < [appDelegate.itemDownloads count]) {
+        PostSticker *post = [appDelegate.itemDownloads objectAtIndex:index];
+        if ([StringUtils equals:post.thumbnail andString:thumbnail]) {
+            targetId = post.stickerId;
+        }
+    }
+    
+    NSString *fileName = targetId;
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *fileNamePath = [NSString stringWithFormat:@"stickers/%@", fileName];
+    NSString *fileNamePath = [NSString stringWithFormat:@"stickers/%@.png", fileName];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:fileNamePath];
-    BOOL fileExists = [fileManager fileExistsAtPath:filePath];
-    NSLog(@"%@ %d", filePath, fileExists);
+
     return filePath;
 }
 
@@ -40,9 +55,18 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     
     thumbnailUrlMap = [NSMutableDictionary dictionary];
 
+    NSMutableArray *thumbnailList = [NSMutableArray array];
     AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    [self setThumbnailUrlMapOn:appDelegate.packDownloads];
-    [self setThumbnailUrlMapOn:appDelegate.itemDownloads];
+    for (Post *post in appDelegate.packDownloads) {
+        [thumbnailList addObject:post.thumbnailOn];
+    }
+    [self setThumbnailUrlMapOn:thumbnailList];
+    
+    [thumbnailList removeAllObjects];
+    for (PostSticker *postSticker in appDelegate.itemDownloads) {
+        [thumbnailList addObject:postSticker.thumbnail];
+    }
+    [self setThumbnailUrlMapOn:thumbnailList];
     
     if ([CommonUtil isEmptyMap:thumbnailUrlMap]) {
         return NO;
@@ -52,8 +76,9 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     NSInteger totalCount = [thumbnailUrlMap count];
     @synchronized (thumbnailUrlMap) {
         for (NSString *thumbnailPath in[thumbnailUrlMap keyEnumerator]) {
-            NSString *saveImagePath = [self makePath:thumbnailPath];
-            [self downloadURL:thumbnailPath toPath:saveImagePath isLast:(i == totalCount - 1)];
+            NSInteger index = [[thumbnailUrlMap objectForKey:thumbnailPath] integerValue];
+            NSString *saveImagePath = [self makePath:thumbnailPath index:index];
+            [self downloadURL:thumbnailPath toPath:saveImagePath isLast:(i == totalCount - 1) index:index];
             i++;
         }
         [thumbnailUrlMap removeAllObjects];
@@ -67,10 +92,12 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
         return;
     }
     
+    NSInteger i = 0;
     for (NSString *thumbnail in thumbnailList) {
         @synchronized (thumbnailUrlMap) {
-            [thumbnailUrlMap setObject:@(1) forKey:thumbnail];
+            [thumbnailUrlMap setObject:@(i) forKey:thumbnail];
         }
+        i++;
     }
 }
 
@@ -85,7 +112,7 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     return _session;
 }
 
-- (NSProgress *)downloadURL:(NSString *)serverPath toPath:(NSString *)path isLast:(BOOL)isLast
+- (NSProgress *)downloadURL:(NSString *)serverPath toPath:(NSString *)path isLast:(BOOL)isLast index:(NSInteger)index
 {
     NSURL *url = nil;
     if ([serverPath hasPrefix:@"http"]) {
@@ -103,7 +130,7 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
                         if (error) {
                             [self onFailureImage:error];
                         } else {
-                            [self onSucceessImage:[location path] serverPath:serverPath isLast:isLast];
+                            [self onSucceessImage:[location path] serverPath:serverPath isLast:isLast index:index];
                         }
                     }];
 
@@ -114,9 +141,9 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     return progress;
 }
 
-- (void)onSucceessImage:(NSString *)localFilePath serverPath:(NSString *)serverPath isLast:(BOOL)isLast
+- (void)onSucceessImage:(NSString *)localFilePath serverPath:(NSString *)serverPath isLast:(BOOL)isLast index:(NSInteger)index
 {
-    NSString *saveImagePath = [self makePath:serverPath];
+    NSString *saveImagePath = [self makePath:serverPath index:index];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL fileExists = [fileManager fileExistsAtPath:saveImagePath];
     if (fileExists) {
