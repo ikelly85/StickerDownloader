@@ -1,0 +1,8 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/GZIP" "${PODS_ROOT}/Headers/Public/JSONModel" "${PODS_ROOT}/Headers/Public/YLFileReader" "${PODS_ROOT}/Headers/Public/tarkit"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking" "$PODS_CONFIGURATION_BUILD_DIR/GZIP" "$PODS_CONFIGURATION_BUILD_DIR/JSONModel" "$PODS_CONFIGURATION_BUILD_DIR/YLFileReader" "$PODS_CONFIGURATION_BUILD_DIR/tarkit"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/GZIP" -isystem "${PODS_ROOT}/Headers/Public/JSONModel" -isystem "${PODS_ROOT}/Headers/Public/YLFileReader" -isystem "${PODS_ROOT}/Headers/Public/tarkit"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking" -l"GZIP" -l"JSONModel" -l"YLFileReader" -l"tarkit" -l"z" -framework "CoreServices" -framework "Security" -framework "SystemConfiguration"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods
