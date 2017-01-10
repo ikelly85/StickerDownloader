@@ -27,7 +27,8 @@
 
 #pragma mark -
 
-+ (NSURLSessionDataTask *)globalTimelinePostsWithBlock:(NSInteger)stickerPackSeq block:(void (^)(NSArray *postStickers, NSError *error))block {
++ (NSURLSessionDataTask *)globalTimelinePostsWithBlock:(NSInteger)stickerPackSeq stickerPackId:(NSString *)stickerPackId block:(void (^)(NSArray *postStickers, NSError *error))block
+{
     NSString *url = [NSString stringWithFormat:@"deco/item/list?stickerPackSeq=%zd", stickerPackSeq];
     return [[AFAppDotNetAPIClient sharedClient] GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSArray *postsFromResponse = [JSON valueForKeyPath:@"result.stickerList"];
@@ -41,6 +42,7 @@
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         for (NSDictionary *attributes in postsFromResponse) {
             PostSticker *postSticker = [[PostSticker alloc] initWithAttributes:attributes];
+            [postSticker setStickerPackId:stickerPackId];
             if (postSticker.exposeIos) {
                 [mutablePosts addObject:postSticker];
             }

@@ -22,6 +22,7 @@ typedef enum PostStickerType {
 @interface PostSticker : JSONModel
 
 @property (nonatomic) NSUInteger stickerPackSeq;
+@property (nonatomic, strong) NSString *stickerPackId;
 @property (nonatomic, strong) NSString *stickerId;
 
 @property (nonatomic, strong) NSString *thumbnail;
@@ -34,5 +35,5 @@ typedef enum PostStickerType {
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 
-+ (NSURLSessionDataTask *)globalTimelinePostsWithBlock:(NSInteger)stickerPackSeq block:(void (^)(NSArray *postStickers, NSError *error))block;
++ (NSURLSessionDataTask *)globalTimelinePostsWithBlock:(NSInteger)stickerPackSeq stickerPackId:(NSString *)stickerPackId block:(void (^)(NSArray *postStickers, NSError *error))block;
 @end

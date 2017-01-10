@@ -48,7 +48,7 @@
         for (Post *post in posts) {
             [packDownloads addObject:post];
             
-            [PostSticker globalTimelinePostsWithBlock:post.stickerPackSeq block:^(NSArray *postStickers, NSError *error) {
+            [PostSticker globalTimelinePostsWithBlock:post.stickerPackSeq stickerPackId:post.stickerPackId block:^(NSArray *postStickers, NSError *error) {
                 if (postStickers && [postStickers count] > 0) {
                     for (PostSticker *postSticker in postStickers) {
                         [itemDownloads addObject:postSticker];
