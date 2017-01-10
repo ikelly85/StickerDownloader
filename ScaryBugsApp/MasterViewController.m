@@ -32,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self makeDir];
+    
     packDownloads = [NSMutableArray array];
     itemDownloads = [NSMutableArray array];
     
@@ -66,6 +68,21 @@
     }];
 }
 
+- (void)makeDir
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *postStickerPath = [documentsPath stringByAppendingPathComponent:@"postSticker"];
+    if (![fileManager fileExistsAtPath:postStickerPath]) {
+        [fileManager createDirectoryAtPath:postStickerPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+
+    NSString *imagesPath = [postStickerPath stringByAppendingPathComponent:@"images"];
+    if (![fileManager fileExistsAtPath:imagesPath]) {
+        [fileManager createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+}
+
 - (void)download
 {
     AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
@@ -82,7 +99,25 @@
         
         [_packTextView setString:[appDelegate.exportPacks toJSONString]];
         [_itemTextView setString:[appDelegate.exportStickers toJSONString]];
+        [self writeStringToFile:[appDelegate.exportPacks toJSONString] fileName:@"pack"];
+        [self writeStringToFile:[appDelegate.exportStickers toJSONString] fileName:@"sticker"];
     });
+}
+
+- (void)writeStringToFile:(NSString *)jsonString fileName:(NSString *)fileName
+{
+    // Build the path, and create if needed.
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+
+    NSString *fileNamePath = [NSString stringWithFormat:@"postSticker/%@.json", fileName];
+    NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileNamePath];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:fileAtPath]) {
+        [[NSFileManager defaultManager] createFileAtPath:fileAtPath contents:nil attributes:nil];
+    }
+    
+    // The main act...
+    [[jsonString dataUsingEncoding:NSUTF8StringEncoding] writeToFile:fileAtPath atomically:NO];
 }
 
 @end
