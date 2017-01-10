@@ -9,7 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MasterViewController : NSViewController
+@property (unsafe_unretained) IBOutlet NSTextView *packTextView;
+@property (unsafe_unretained) IBOutlet NSTextView *itemTextView;
 
-@property (strong) NSMutableArray *bugs;
-
+- (void)show;
 @end

@@ -7,13 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JSONModel.h>
 
-@interface PostSticker : NSObject
+typedef enum PostStickerType {
+    PostStickerTypeEmoji,
+    PostStickerTypeImage = 101,
+    PostStickerTypeBubble = 102,
+} PostStickerType;
+
+@protocol PostSticker <NSObject>
+
+@end
+
+@interface PostSticker : JSONModel
 
 @property (nonatomic) NSUInteger stickerPackSeq;
 @property (nonatomic, strong) NSString *stickerId;
+
 @property (nonatomic, strong) NSString *thumbnail;
 @property (nonatomic) BOOL exposeIos;
+
+@property (nonatomic, strong) NSString *stickerName;
+@property (nonatomic) PostStickerType stickerType;
+@property (nonatomic, strong) NSDate *registeredDatetime;
+@property (nonatomic) NSInteger sortOrder;
+
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 
 + (NSURLSessionDataTask *)globalTimelinePostsWithBlock:(NSInteger)stickerPackSeq block:(void (^)(NSArray *postStickers, NSError *error))block;

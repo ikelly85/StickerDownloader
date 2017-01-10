@@ -157,7 +157,8 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     }
 
     if (isLast) {
-        
+        AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+        [appDelegate show];
     }
 }
 

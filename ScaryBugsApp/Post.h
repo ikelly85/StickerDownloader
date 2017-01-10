@@ -21,8 +21,13 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <JSONModel.h>
 
-@interface Post : NSObject
+@protocol Post <NSObject>
+
+@end
+
+@interface Post : JSONModel
 
 @property (nonatomic) NSUInteger stickerPackSeq;
 @property (nonatomic, strong) NSString *stickerPackId;

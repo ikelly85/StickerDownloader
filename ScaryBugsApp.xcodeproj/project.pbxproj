@@ -16,8 +16,6 @@
 		35BB3F8515D6CF310079230E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F8315D6CF310079230E /* MainMenu.xib */; };
 		35BB3F8E15D6D2560079230E /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BB3F8C15D6D2560079230E /* MasterViewController.m */; };
 		35BB3F8F15D6D2560079230E /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F8D15D6D2560079230E /* MasterViewController.xib */; };
-		35BB3F9415D6D8FC0079230E /* ScaryBugData.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BB3F9315D6D8FC0079230E /* ScaryBugData.m */; };
-		35BB3F9715D6D9E30079230E /* ScaryBugDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BB3F9615D6D9E30079230E /* ScaryBugDoc.m */; };
 		35BB3FA215D6DB370079230E /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9915D6DB370079230E /* attribution.txt */; };
 		35BB3FA315D6DB370079230E /* ladybugThumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9A15D6DB370079230E /* ladybugThumb.jpg */; };
 		35BB3FA415D6DB370079230E /* ladybug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9B15D6DB370079230E /* ladybug.jpg */; };
@@ -34,6 +32,8 @@
 		A253E5511E247A41003D4541 /* ThumbnailWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5501E247A41003D4541 /* ThumbnailWorker.m */; };
 		A253E5581E247AA6003D4541 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5541E247AA6003D4541 /* CommonUtil.m */; };
 		A253E5591E247AA6003D4541 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5571E247AA6003D4541 /* StringUtils.m */; };
+		A253E55C1E24B1C3003D4541 /* ExportStickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E55B1E24B1C3003D4541 /* ExportStickers.m */; };
+		A253E55F1E24B36A003D4541 /* ExportPacks.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E55E1E24B36A003D4541 /* ExportPacks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,10 +53,6 @@
 		35BB3F8B15D6D2560079230E /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		35BB3F8C15D6D2560079230E /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		35BB3F8D15D6D2560079230E /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
-		35BB3F9215D6D8FC0079230E /* ScaryBugData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaryBugData.h; sourceTree = "<group>"; };
-		35BB3F9315D6D8FC0079230E /* ScaryBugData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaryBugData.m; sourceTree = "<group>"; };
-		35BB3F9515D6D9E30079230E /* ScaryBugDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaryBugDoc.h; sourceTree = "<group>"; };
-		35BB3F9615D6D9E30079230E /* ScaryBugDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaryBugDoc.m; sourceTree = "<group>"; };
 		35BB3F9915D6DB370079230E /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
 		35BB3F9A15D6DB370079230E /* ladybugThumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ladybugThumb.jpg; sourceTree = "<group>"; };
 		35BB3F9B15D6DB370079230E /* ladybug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ladybug.jpg; sourceTree = "<group>"; };
@@ -82,6 +78,10 @@
 		A253E5551E247AA6003D4541 /* ObjectiveCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCUtil.h; sourceTree = "<group>"; };
 		A253E5561E247AA6003D4541 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		A253E5571E247AA6003D4541 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
+		A253E55A1E24B1C3003D4541 /* ExportStickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportStickers.h; sourceTree = "<group>"; };
+		A253E55B1E24B1C3003D4541 /* ExportStickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportStickers.m; sourceTree = "<group>"; };
+		A253E55D1E24B36A003D4541 /* ExportPacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportPacks.h; sourceTree = "<group>"; };
+		A253E55E1E24B36A003D4541 /* ExportPacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportPacks.m; sourceTree = "<group>"; };
 		BCF6EEDFBAA54B9D4C132C1B /* libPods-ScaryBugsApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScaryBugsApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88DFE61FD47B826EC8EE34C /* Pods-ScaryBugsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScaryBugsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScaryBugsApp/Pods-ScaryBugsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,12 +185,12 @@
 			children = (
 				A253E5431E235827003D4541 /* Post.h */,
 				A253E5441E235827003D4541 /* Post.m */,
-				35BB3F9215D6D8FC0079230E /* ScaryBugData.h */,
-				35BB3F9315D6D8FC0079230E /* ScaryBugData.m */,
-				35BB3F9515D6D9E30079230E /* ScaryBugDoc.h */,
-				35BB3F9615D6D9E30079230E /* ScaryBugDoc.m */,
 				A253E5491E235B6B003D4541 /* PostSticker.h */,
 				A253E54A1E235B6B003D4541 /* PostSticker.m */,
+				A253E55A1E24B1C3003D4541 /* ExportStickers.h */,
+				A253E55B1E24B1C3003D4541 /* ExportStickers.m */,
+				A253E55D1E24B36A003D4541 /* ExportPacks.h */,
+				A253E55E1E24B36A003D4541 /* ExportPacks.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -363,10 +363,10 @@
 				35BB3F8E15D6D2560079230E /* MasterViewController.m in Sources */,
 				A253E5591E247AA6003D4541 /* StringUtils.m in Sources */,
 				A253E54B1E235B6B003D4541 /* PostSticker.m in Sources */,
-				35BB3F9415D6D8FC0079230E /* ScaryBugData.m in Sources */,
 				A253E5581E247AA6003D4541 /* CommonUtil.m in Sources */,
 				A253E5421E235820003D4541 /* AFAppDotNetAPIClient.m in Sources */,
-				35BB3F9715D6D9E30079230E /* ScaryBugDoc.m in Sources */,
+				A253E55F1E24B36A003D4541 /* ExportPacks.m in Sources */,
+				A253E55C1E24B1C3003D4541 /* ExportStickers.m in Sources */,
 				A253E54E1E247A18003D4541 /* AbstractWorker.m in Sources */,
 				A253E5471E235827003D4541 /* Post.m in Sources */,
 			);
