@@ -28,7 +28,6 @@ typedef enum PostStickerType {
 @property (nonatomic, strong) NSString *thumbnail;
 @property (nonatomic) BOOL exposeIos;
 
-@property (nonatomic, strong) NSString *stickerName;
 @property (nonatomic) PostStickerType stickerType;
 @property (nonatomic, strong) NSDate *registeredDatetime;
 @property (nonatomic) NSInteger sortOrder;

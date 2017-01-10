@@ -18,9 +18,13 @@
     }
     
     self.stickerPackSeq = (NSUInteger)[[attributes valueForKeyPath:@"stickerPackSeq"] integerValue];
+    self.stickerPackId = [attributes valueForKeyPath:@"stickerPackId"];
     self.stickerId = [attributes valueForKeyPath:@"stickerId"];
     self.thumbnail = [attributes valueForKeyPath:@"thumbnail"];
     self.exposeIos = [[attributes valueForKeyPath:@"exposeIos"] boolValue];
+    self.stickerType = (PostStickerType)[[attributes valueForKeyPath:@"stickerType"] integerValue];
+    self.registeredDatetime = [attributes valueForKeyPath:@"registeredDatetime"];
+    self.sortOrder = (NSInteger)[[attributes valueForKeyPath:@"sortOrder"] integerValue];
     
     return self;
 }
