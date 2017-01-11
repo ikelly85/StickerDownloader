@@ -16,15 +16,6 @@
 		35BB3F8515D6CF310079230E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F8315D6CF310079230E /* MainMenu.xib */; };
 		35BB3F8E15D6D2560079230E /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BB3F8C15D6D2560079230E /* MasterViewController.m */; };
 		35BB3F8F15D6D2560079230E /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F8D15D6D2560079230E /* MasterViewController.xib */; };
-		35BB3FA215D6DB370079230E /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9915D6DB370079230E /* attribution.txt */; };
-		35BB3FA315D6DB370079230E /* ladybugThumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9A15D6DB370079230E /* ladybugThumb.jpg */; };
-		35BB3FA415D6DB370079230E /* ladybug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9B15D6DB370079230E /* ladybug.jpg */; };
-		35BB3FA515D6DB370079230E /* potatoBugThumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9C15D6DB370079230E /* potatoBugThumb.jpg */; };
-		35BB3FA615D6DB370079230E /* wolfSpiderThumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9D15D6DB370079230E /* wolfSpiderThumb.jpg */; };
-		35BB3FA715D6DB370079230E /* centipedeThumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9E15D6DB370079230E /* centipedeThumb.jpg */; };
-		35BB3FA815D6DB370079230E /* centipede.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3F9F15D6DB370079230E /* centipede.jpg */; };
-		35BB3FA915D6DB370079230E /* wolfSpider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3FA015D6DB370079230E /* wolfSpider.jpg */; };
-		35BB3FAA15D6DB370079230E /* potatoBug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 35BB3FA115D6DB370079230E /* potatoBug.jpg */; };
 		A253E5421E235820003D4541 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5411E235820003D4541 /* AFAppDotNetAPIClient.m */; };
 		A253E5471E235827003D4541 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5441E235827003D4541 /* Post.m */; };
 		A253E54B1E235B6B003D4541 /* PostSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E54A1E235B6B003D4541 /* PostSticker.m */; };
@@ -34,6 +25,7 @@
 		A253E5591E247AA6003D4541 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E5571E247AA6003D4541 /* StringUtils.m */; };
 		A253E55C1E24B1C3003D4541 /* ExportStickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E55B1E24B1C3003D4541 /* ExportStickers.m */; };
 		A253E55F1E24B36A003D4541 /* ExportPacks.m in Sources */ = {isa = PBXBuildFile; fileRef = A253E55E1E24B36A003D4541 /* ExportPacks.m */; };
+		A296A07D1E2611A200C95809 /* ContentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A296A07C1E2611A200C95809 /* ContentsModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,15 +45,6 @@
 		35BB3F8B15D6D2560079230E /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		35BB3F8C15D6D2560079230E /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		35BB3F8D15D6D2560079230E /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
-		35BB3F9915D6DB370079230E /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
-		35BB3F9A15D6DB370079230E /* ladybugThumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ladybugThumb.jpg; sourceTree = "<group>"; };
-		35BB3F9B15D6DB370079230E /* ladybug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ladybug.jpg; sourceTree = "<group>"; };
-		35BB3F9C15D6DB370079230E /* potatoBugThumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = potatoBugThumb.jpg; sourceTree = "<group>"; };
-		35BB3F9D15D6DB370079230E /* wolfSpiderThumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wolfSpiderThumb.jpg; sourceTree = "<group>"; };
-		35BB3F9E15D6DB370079230E /* centipedeThumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = centipedeThumb.jpg; sourceTree = "<group>"; };
-		35BB3F9F15D6DB370079230E /* centipede.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = centipede.jpg; sourceTree = "<group>"; };
-		35BB3FA015D6DB370079230E /* wolfSpider.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wolfSpider.jpg; sourceTree = "<group>"; };
-		35BB3FA115D6DB370079230E /* potatoBug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = potatoBug.jpg; sourceTree = "<group>"; };
 		808C19CBDA91264F5E6169BD /* Pods-ScaryBugsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScaryBugsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScaryBugsApp/Pods-ScaryBugsApp.release.xcconfig"; sourceTree = "<group>"; };
 		A253E5401E235820003D4541 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
 		A253E5411E235820003D4541 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
@@ -82,6 +65,8 @@
 		A253E55B1E24B1C3003D4541 /* ExportStickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportStickers.m; sourceTree = "<group>"; };
 		A253E55D1E24B36A003D4541 /* ExportPacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportPacks.h; sourceTree = "<group>"; };
 		A253E55E1E24B36A003D4541 /* ExportPacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportPacks.m; sourceTree = "<group>"; };
+		A296A07B1E2611A200C95809 /* ContentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentsModel.h; sourceTree = "<group>"; };
+		A296A07C1E2611A200C95809 /* ContentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentsModel.m; sourceTree = "<group>"; };
 		BCF6EEDFBAA54B9D4C132C1B /* libPods-ScaryBugsApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScaryBugsApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88DFE61FD47B826EC8EE34C /* Pods-ScaryBugsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScaryBugsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScaryBugsApp/Pods-ScaryBugsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +132,6 @@
 				A253E5411E235820003D4541 /* AFAppDotNetAPIClient.m */,
 				A253E54F1E247A41003D4541 /* ThumbnailWorker.h */,
 				A253E5501E247A41003D4541 /* ThumbnailWorker.m */,
-				35BB3F9815D6DB2A0079230E /* Images */,
 				35BB3F9115D6D7210079230E /* Model */,
 				35BB3F9015D6D65D0079230E /* GUI */,
 				35BB3F7515D6CF310079230E /* Supporting Files */,
@@ -191,24 +175,10 @@
 				A253E55B1E24B1C3003D4541 /* ExportStickers.m */,
 				A253E55D1E24B36A003D4541 /* ExportPacks.h */,
 				A253E55E1E24B36A003D4541 /* ExportPacks.m */,
+				A296A07B1E2611A200C95809 /* ContentsModel.h */,
+				A296A07C1E2611A200C95809 /* ContentsModel.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		35BB3F9815D6DB2A0079230E /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				35BB3F9915D6DB370079230E /* attribution.txt */,
-				35BB3F9A15D6DB370079230E /* ladybugThumb.jpg */,
-				35BB3F9B15D6DB370079230E /* ladybug.jpg */,
-				35BB3F9C15D6DB370079230E /* potatoBugThumb.jpg */,
-				35BB3F9D15D6DB370079230E /* wolfSpiderThumb.jpg */,
-				35BB3F9E15D6DB370079230E /* centipedeThumb.jpg */,
-				35BB3F9F15D6DB370079230E /* centipede.jpg */,
-				35BB3FA015D6DB370079230E /* wolfSpider.jpg */,
-				35BB3FA115D6DB370079230E /* potatoBug.jpg */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 		A253E5521E247A91003D4541 /* util */ = {
@@ -290,15 +260,6 @@
 				35BB3F7F15D6CF310079230E /* Credits.rtf in Resources */,
 				35BB3F8515D6CF310079230E /* MainMenu.xib in Resources */,
 				35BB3F8F15D6D2560079230E /* MasterViewController.xib in Resources */,
-				35BB3FA215D6DB370079230E /* attribution.txt in Resources */,
-				35BB3FA315D6DB370079230E /* ladybugThumb.jpg in Resources */,
-				35BB3FA415D6DB370079230E /* ladybug.jpg in Resources */,
-				35BB3FA515D6DB370079230E /* potatoBugThumb.jpg in Resources */,
-				35BB3FA615D6DB370079230E /* wolfSpiderThumb.jpg in Resources */,
-				35BB3FA715D6DB370079230E /* centipedeThumb.jpg in Resources */,
-				35BB3FA815D6DB370079230E /* centipede.jpg in Resources */,
-				35BB3FA915D6DB370079230E /* wolfSpider.jpg in Resources */,
-				35BB3FAA15D6DB370079230E /* potatoBug.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +328,7 @@
 				A253E5421E235820003D4541 /* AFAppDotNetAPIClient.m in Sources */,
 				A253E55F1E24B36A003D4541 /* ExportPacks.m in Sources */,
 				A253E55C1E24B1C3003D4541 /* ExportStickers.m in Sources */,
+				A296A07D1E2611A200C95809 /* ContentsModel.m in Sources */,
 				A253E54E1E247A18003D4541 /* AbstractWorker.m in Sources */,
 				A253E5471E235827003D4541 /* Post.m in Sources */,
 			);

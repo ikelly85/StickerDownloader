@@ -22,7 +22,7 @@
 
 #import "AFAppDotNetAPIClient.h"
 
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me/api/sticker/";
+static NSString *AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me/api/sticker/";
 
 @implementation AFAppDotNetAPIClient
 
@@ -30,7 +30,16 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me
     static AFAppDotNetAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_DEV"]) {
+            AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me/api/sticker/";
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_QA"]) {
+            AFAppDotNetAPIBaseURLString = @"http://qa.admin.snow.me/api/sticker/";
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_REAL"]) {
+            AFAppDotNetAPIBaseURLString = @"http://admin.snow.me/api/sticker/";
+        }
+        
         _sharedClient = [[AFAppDotNetAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFAppDotNetAPIBaseURLString]];
+        
     });
     
     return _sharedClient;

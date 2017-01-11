@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "ThumbnailWorker.h"
 #import "StringUtils.h"
+#import "ContentsModel.h"
 
 @implementation MasterViewController
 {
@@ -110,6 +111,9 @@
         NSString *assetPath = [applicationPath stringByAppendingPathComponent:@"Images.xcassets/post_stickers"];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:assetPath error:nil];
+        [fileManager createDirectoryAtPath:assetPath withIntermediateDirectories:NO attributes:nil error:nil];
+        
         NSURL *directoryURL = [NSURL fileURLWithPath:docResourcePath isDirectory:YES];
         NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
         
@@ -130,16 +134,39 @@
                 // handle error
             } else {
                 // No error and it’s not a directory; do something with the file
-                if ([isDirectory boolValue]) {
-                    [fileManager createDirectoryAtPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] withIntermediateDirectories:NO attributes:nil error:nil];
-                } else {
+                if (![isDirectory boolValue]) {
                     if ([url.lastPathComponent hasSuffix:@".json"]) {
                         NSString *jsonResourcePath = [applicationPath stringByAppendingPathComponent:@"Resources/postSticker"];
                         NSURL *destURL = [NSURL fileURLWithPath:[jsonResourcePath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
                         [fileManager copyItemAtURL:url toURL:destURL error:&error];
                     } else {
-                        NSURL *destURL = [NSURL fileURLWithPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
+                        NSString *assetImage = [[url.lastPathComponent stringByDeletingPathExtension] stringByReplacingOccurrencesOfString:@"@3x" withString:@""];
+                        NSString *assetImageFolderName = [assetImage stringByAppendingString:@".imageset"];
+                        NSString *assetImageFolder = [assetPath stringByAppendingPathComponent:assetImageFolderName];
+                        [fileManager createDirectoryAtPath:assetImageFolder withIntermediateDirectories:NO attributes:nil error:nil];
+                        
+                        NSURL *destURL = [NSURL fileURLWithPath:[assetImageFolder stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
                         [fileManager copyItemAtURL:url toURL:destURL error:&error];
+                        
+                        ContentsModel *contentsModel = [ContentsModel new];
+                        ImageModel *imageModel = [ImageModel new];
+                        [imageModel setIdiom:@"universal"];
+                        [imageModel setFilename:url.lastPathComponent];
+                        [imageModel setScale:@"3x"];
+                        [contentsModel setImages:(NSArray <ImageModel> *)@[imageModel]];
+                        
+                        InfoModel *infoModel = [InfoModel new];
+                        [infoModel setAuthor:@"xcode"];
+                        [infoModel setVersion:1];
+                        [contentsModel setInfo:infoModel];
+                        
+                        NSString *jsonText = [contentsModel toJSONString];
+                        NSString *contentsFilePath = [assetImageFolder stringByAppendingPathComponent:@"Contents.json"];
+                        if (![[NSFileManager defaultManager] fileExistsAtPath:contentsFilePath]) {
+                            [[NSFileManager defaultManager] createFileAtPath:contentsFilePath contents:nil attributes:nil];
+                        }
+
+                        [[jsonText dataUsingEncoding:NSUTF8StringEncoding] writeToFile:contentsFilePath atomically:NO];
                     }
                 }
             }

@@ -38,7 +38,7 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     
     NSString *fileName = targetId;
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *fileNamePath = [NSString stringWithFormat:@"postSticker/images/%@.png", fileName];
+    NSString *fileNamePath = [NSString stringWithFormat:@"postSticker/images/%@@3x.png", fileName];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:fileNamePath];
 
     return filePath;
