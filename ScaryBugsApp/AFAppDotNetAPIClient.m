@@ -30,11 +30,11 @@ static NSString *AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me/api/st
     static AFAppDotNetAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_DEV"]) {
+        if ([[[NSProcessInfo processInfo] arguments] containsObject:@"DEV"]) {
             AFAppDotNetAPIBaseURLString = @"http://dev.admin.snow.me/api/sticker/";
-        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_QA"]) {
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"QA"]) {
             AFAppDotNetAPIBaseURLString = @"http://qa.admin.snow.me/api/sticker/";
-        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"PHASE_REAL"]) {
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"STAGE"] || [[[NSProcessInfo processInfo] arguments] containsObject:@"REAL"]) {
             AFAppDotNetAPIBaseURLString = @"http://admin.snow.me/api/sticker/";
         }
         
