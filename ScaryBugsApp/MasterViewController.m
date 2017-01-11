@@ -99,8 +99,47 @@
         
         [_packTextView setString:[appDelegate.exportPacks toJSONString]];
         [_itemTextView setString:[appDelegate.exportStickers toJSONString]];
+        
         [self writeStringToFile:[appDelegate.exportPacks toJSONString] fileName:@"pack"];
         [self writeStringToFile:[appDelegate.exportStickers toJSONString] fileName:@"sticker"];
+        
+        NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *docResourcePath = [docPath stringByAppendingPathComponent:@"postSticker"];
+        
+        NSString *applicationPath = [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *assetPath = [applicationPath stringByAppendingPathComponent:@"Images.xcassets/post_stickers"];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *directoryURL = [NSURL fileURLWithPath:docResourcePath isDirectory:YES];
+        NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
+        
+        NSDirectoryEnumerator *enumerator = [fileManager
+                                             enumeratorAtURL:directoryURL
+                                             includingPropertiesForKeys:keys
+                                             options:0
+                                             errorHandler:^(NSURL *url, NSError *error) {
+                                                 // Handle the error.
+                                                 // Return YES if the enumeration should continue after the error.
+                                                 return YES;
+                                             }];
+        
+        for (NSURL *url in enumerator) { 
+            NSError *error;
+            NSNumber *isDirectory = nil;
+            if (![url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
+                // handle error
+            } else {
+                // No error and it’s not a directory; do something with the file
+                if ([isDirectory boolValue]) {
+                    [fileManager createDirectoryAtPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] withIntermediateDirectories:NO attributes:nil error:nil];
+                } else {
+                    NSURL *destURL = [NSURL fileURLWithPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
+                    [fileManager copyItemAtURL:url toURL:destURL error:&error];
+                }
+            }
+        }
+        
+        [fileManager removeItemAtPath:docResourcePath error:nil];
     });
 }
 
