@@ -105,8 +105,8 @@
         
         NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *docResourcePath = [docPath stringByAppendingPathComponent:@"postSticker"];
-        
-        NSString *applicationPath = [[NSFileManager defaultManager] currentDirectoryPath];
+
+        NSString *applicationPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
         NSString *assetPath = [applicationPath stringByAppendingPathComponent:@"Images.xcassets/post_stickers"];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -133,8 +133,14 @@
                 if ([isDirectory boolValue]) {
                     [fileManager createDirectoryAtPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] withIntermediateDirectories:NO attributes:nil error:nil];
                 } else {
-                    NSURL *destURL = [NSURL fileURLWithPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
-                    [fileManager copyItemAtURL:url toURL:destURL error:&error];
+                    if ([url.lastPathComponent hasSuffix:@".json"]) {
+                        NSString *jsonResourcePath = [applicationPath stringByAppendingPathComponent:@"Resources/postSticker"];
+                        NSURL *destURL = [NSURL fileURLWithPath:[jsonResourcePath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
+                        [fileManager copyItemAtURL:url toURL:destURL error:&error];
+                    } else {
+                        NSURL *destURL = [NSURL fileURLWithPath:[assetPath stringByAppendingPathComponent:url.lastPathComponent] isDirectory:NO];
+                        [fileManager copyItemAtURL:url toURL:destURL error:&error];
+                    }
                 }
             }
         }
