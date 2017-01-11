@@ -18,6 +18,7 @@
 {
     NSMutableArray *packDownloads;
     NSMutableArray *itemDownloads;
+    NSFileManager *fileManager;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    fileManager = [NSFileManager defaultManager];
+    
     [self makeDir];
     
     packDownloads = [NSMutableArray array];
@@ -71,7 +74,6 @@
 
 - (void)makeDir
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *postStickerPath = [documentsPath stringByAppendingPathComponent:@"postSticker"];
     if (![fileManager fileExistsAtPath:postStickerPath]) {
@@ -93,6 +95,29 @@
     
 }
 
+- (void)cleansing
+{
+    NSString *applicationPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
+    NSString *assetPath = [applicationPath stringByAppendingPathComponent:@"Images.xcassets/post_stickers"];
+    
+    [fileManager removeItemAtPath:assetPath error:nil];
+    [fileManager createDirectoryAtPath:assetPath withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    ContentsModel *contentsModel = [ContentsModel new];
+    InfoModel *infoModel = [InfoModel new];
+    [infoModel setAuthor:@"xcode"];
+    [infoModel setVersion:1];
+    [contentsModel setInfo:infoModel];
+    
+    NSString *jsonText = [contentsModel toJSONString];
+    NSString *contentsFilePath = [assetPath stringByAppendingPathComponent:@"Contents.json"];
+    if (![fileManager fileExistsAtPath:contentsFilePath]) {
+        [fileManager createFileAtPath:contentsFilePath contents:nil attributes:nil];
+    }
+    
+    [[jsonText dataUsingEncoding:NSUTF8StringEncoding] writeToFile:contentsFilePath atomically:NO];
+}
+
 - (void)show
 {
     dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -104,15 +129,14 @@
         [self writeStringToFile:[appDelegate.exportPacks toJSONString] fileName:@"pack"];
         [self writeStringToFile:[appDelegate.exportStickers toJSONString] fileName:@"sticker"];
         
+        [self cleansing];
+        
         NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *docResourcePath = [docPath stringByAppendingPathComponent:@"postSticker"];
 
         NSString *applicationPath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
         NSString *assetPath = [applicationPath stringByAppendingPathComponent:@"Images.xcassets/post_stickers"];
         
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager removeItemAtPath:assetPath error:nil];
-        [fileManager createDirectoryAtPath:assetPath withIntermediateDirectories:NO attributes:nil error:nil];
         
         NSURL *directoryURL = [NSURL fileURLWithPath:docResourcePath isDirectory:YES];
         NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
@@ -162,8 +186,8 @@
                         
                         NSString *jsonText = [contentsModel toJSONString];
                         NSString *contentsFilePath = [assetImageFolder stringByAppendingPathComponent:@"Contents.json"];
-                        if (![[NSFileManager defaultManager] fileExistsAtPath:contentsFilePath]) {
-                            [[NSFileManager defaultManager] createFileAtPath:contentsFilePath contents:nil attributes:nil];
+                        if (![fileManager fileExistsAtPath:contentsFilePath]) {
+                            [fileManager createFileAtPath:contentsFilePath contents:nil attributes:nil];
                         }
 
                         [[jsonText dataUsingEncoding:NSUTF8StringEncoding] writeToFile:contentsFilePath atomically:NO];
@@ -173,6 +197,7 @@
         }
         
         [fileManager removeItemAtPath:docResourcePath error:nil];
+        [NSApp terminate:self];
     });
 }
 
@@ -184,8 +209,8 @@
     NSString *fileNamePath = [NSString stringWithFormat:@"postSticker/%@.json", fileName];
     NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileNamePath];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:fileAtPath]) {
-        [[NSFileManager defaultManager] createFileAtPath:fileAtPath contents:nil attributes:nil];
+    if (![fileManager fileExistsAtPath:fileAtPath]) {
+        [fileManager createFileAtPath:fileAtPath contents:nil attributes:nil];
     }
     
     // The main act...
