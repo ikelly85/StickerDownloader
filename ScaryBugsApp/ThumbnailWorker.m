@@ -58,13 +58,17 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
     NSMutableArray *thumbnailList = [NSMutableArray array];
     AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     for (Post *post in appDelegate.packDownloads) {
-        [thumbnailList addObject:post.thumbnailOn];
+        if ([StringUtils isNotEmpty:post.thumbnailOn]) {
+            [thumbnailList addObject:post.thumbnailOn];
+        }
     }
     [self setThumbnailUrlMapOn:thumbnailList];
     
     [thumbnailList removeAllObjects];
     for (PostSticker *postSticker in appDelegate.itemDownloads) {
-        [thumbnailList addObject:postSticker.thumbnail];
+        if ([StringUtils isNotEmpty:postSticker.thumbnail]) {
+            [thumbnailList addObject:postSticker.thumbnail];
+        }
     }
     [self setThumbnailUrlMapOn:thumbnailList];
     
