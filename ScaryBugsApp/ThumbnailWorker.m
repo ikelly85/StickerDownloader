@@ -123,6 +123,13 @@ SYNTHESIZE_SINGLETON_CLASS(ThumbnailWorker, sharedInstance);
         url = [NSURL URLWithString:serverPath];
     } else {
         NSString *baseServerPath = @"http://dev-gw.snow.me";
+        if ([[[NSProcessInfo processInfo] arguments] containsObject:@"DEV"]) {
+            baseServerPath = @"http://dev-gw.snow.me";
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"QA"]) {
+            baseServerPath = @"http://qa-gw.snow.me";
+        } else if ([[[NSProcessInfo processInfo] arguments] containsObject:@"STAGE"] || [[[NSProcessInfo processInfo] arguments] containsObject:@"REAL"]) {
+            baseServerPath = @"http://gw.snow.me";
+        }
         url = [NSURL URLWithString:[baseServerPath stringByAppendingPathComponent:serverPath]];
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
